@@ -1,0 +1,120 @@
+body{
+    background-image: url(./img/fondojpg.jpg);
+    background-size: cover;
+}
+
+h1{
+    color: white;
+    font-weight: bold;
+    font-family :'Courier New', Courier, monospace;
+    font-size: 35px;
+}
+
+
+
+.content{
+    height: 350px;
+    width: 280px;
+    border-radius: 6px;
+    border: none;
+   float: left;
+   margin: 20px;
+   
+    
+  
+ 
+
+}
+
+#box1{
+
+    background-image: url(./img/box1.jpg);
+    background-size: cover;
+    text-align: center;
+    display: block;
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    
+    
+
+}
+
+#box2{
+    background-image:url(./img/box2.jpg);
+    background-size: cover;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-size: 18px;
+    display: block;
+   
+}
+
+#box3{
+    background-image: url(./img/box3.jpg);
+    background-size: cover;
+    font-size: 18px;
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+}
+
+#box4{
+    background-image: url(./img/box4.jpg);
+    background-size: cover;
+    color: whitesmoke;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    
+    
+  
+}
+
+
+select{
+    width: 260px;
+    height: 25px;
+    margin-top: 40px;
+    border: none;
+  
+}
+
+
+button{
+    border: none;
+    color: blue;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+
+}
+
+input{
+    margin-top: 20px;
+     border: none;
+     width: 200px;
+     height: 20px;
+     padding: 6px;
+}
+
+
+#logo{
+    padding-left: 600px;
+    border: none;
+  }
+
+label{
+      margin-top: 20px;
+  }
+
+#payments{
+    margin-top: 110px;
+}

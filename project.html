@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="./css/project.css">
+    <title>pokemon-2</title>
+</head>
+<body>  
+        <div> 
+        <h1><center>Welcome Pokemon Bank</center></h1> 
+        <img id="logo" src="./css/img/logo.png" alt="logo-poke" width="100px">
+        </div>
+
+        <div class="content" id="box1"> 
+            <label for="depositoU"> Deposito</label>
+            <input type="number" placeholder="depositar" id="inputDepositar" required >
+            <br>
+            <br>
+            <button type="submit" id="enviar"> Enviar </button>
+            <br>
+            <br>
+            <label for="retiroU"> Retirar :</label>
+            <input type="number" placeholder="retirar" id="inputRetirar" required>
+            <br>
+            <br>
+            <button type="submit"  id="retirar">Retirar</button>
+           </div> 
+    
+         <div class="content" id="box2">
+         <label for="cantidad"> Cantidad a Enviar </label> 
+         <input type="number" name="" id="inputTransf" required placeholder="cantidad a transferir">
+         <br>
+         <label for="nTarjeta">Número de tarjeta</label>
+         <input type="numer " name="" id="inputCredit" required  placeholder="número de tarjeta ">
+         <br>
+         <br>
+         <button type="submit">Transferrir </button>
+         </div>
+
+          <div class="content" id="box3">
+          <select name="" id="opciones">
+          <option value="1"> Pago de Luz </option>
+          <option value="2">  pago de agua </option>
+          <option value="3"> Internet </option>
+          <option value="4"> Telefono</option>
+          </select>
+          <input type="number" placeholder="cantidad a pagar" id="inputPayments" required>
+          <button type="submit" id="pagar">Pagar</button>
+          </div>
+
+            <div class="content" id="box4">
+                <p>Si desea Consultar su Historial de Transancciones </p>
+                <br>
+                <button type="submit" id="consultar"> Consultar</button>
+
+             </div>
+  <script src="./app1.js"></script> 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+</body>
+</html>
