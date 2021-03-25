@@ -7,7 +7,7 @@ let retiro = document.getElementById('inputRetirar');
 let transf = document.getElementById('inputTransf');
 let payments = document.getElementById('inputPayments');
 let opciones = document.getElementById('opciones');
-
+var enviar = document.getElementById('enviar');
 
 var Account={
     nombre : "Billy Guzmán",
@@ -18,18 +18,28 @@ var Account={
 
 var transaccion ={
      
-    saldo: 500,
-    deposito :"",
-    retiro : "",
+    balance: 500,
+    deposito :[],
+    retiro : [],
+    payments :[],
 
 
 }
 
 
-function next(){
-    if(document.forms.password==1234){
-        window.location="./project.html";
-    }else{
-        
-    }
+
+
+function enviar(){
+    deposito =parseInt(inputDeposito.value )
+    deposito+= balance; 
+    inputDeposito.value="";
+
+
+
+    swal('prueba');
+
 }
+let ingreso ;
+let monto= 0;
+
+enviar.addEventListener('click',  enviar);
