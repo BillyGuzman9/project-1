@@ -1,45 +1,78 @@
 let today = new Date()
 console.log(today);
 
-const password=document.getElementById('inputPassword');
-let deposito= document.getElementById("inputDepositar");
-let retiro = document.getElementById('inputRetirar');
+
+
 let transf = document.getElementById('inputTransf');
 let payments = document.getElementById('inputPayments');
 let opciones = document.getElementById('opciones');
-var enviar = document.getElementById('enviar');
+let balance =document.getElementById ('balance ');
 
-var Account={
+  var  pass = document.querySelector('inputPassword');
+  var form = document.querySelector("form-login#form");
+
+
+
+ var account={
     nombre : "Billy Guzmán",
-    password :1234,
+   pass :1234,
     tarjeta : 789456,
-}
-
+ }
 
 var transaccion ={
-     
-    balance: 500,
-    deposito :[],
-    retiro : [],
-    payments :[],
+    balance :500,
+    deposito : "",
+    retiro : "",
+    payments :"",
 
+
+ }
+
+function depositar() {
+  
+  let inputDeposito = document.getElementById('inputDepositar');
+  let valorADepositar = parseInt(inputDeposito.value);
+  transaccion.balance +=valorADepositar;
+  inputDeposito.value = '';
+  swal('su balance nuevo es: '+transaccion.balance);
+}
+
+enviar.addEventListener('click', depositar)
+
+
+
+function retiro () {
+
+  let inputRetiro = document.getElementById('inputRetirar');
+  let valorARetirar = parseInt(inputRetiro.value);
+  transaccion.balance -=valorARetirar;
+  inputRetiro.value = '';
+  swal('su balance nuevo es: '+transaccion.balance);
 
 }
 
 
 
 
-function enviar(){
-    deposito =parseInt(inputDeposito.value )
-    deposito+= balance; 
-    inputDeposito.value="";
 
 
 
-    swal('prueba');
 
-}
-let ingreso ;
-let monto= 0;
 
-enviar.addEventListener('click',  enviar);
+
+/*var enviar = document.getElementById('enviar');
+// enviar.addEventListener('click', deposit);
+
+function enter(){
+    var pass2=1234;
+
+    if(pass2>=0){
+        swal('bievenido');
+      location.href="/project.html";
+
+    }else{
+        swal("error");
+    }
+
+
+  };*/

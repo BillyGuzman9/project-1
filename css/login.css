@@ -95,3 +95,9 @@ h2{
    top:43%;
    letter-spacing: 3px;
 }
+
+
+.submit{
+   border: transparent;
+   color: black;
+}

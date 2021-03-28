@@ -13,30 +13,31 @@
 <body>  
         <div id="titulo"> 
         <h1><center> <strong> <u>Welcome Pokémon Bank</u> </strong></center></h1> 
-        </div>
+        </div> 
+        <br>
 
         <div class="content" id="box1"> 
             <label for="depositoU"> Deposito</label>
-            <input type="number" placeholder="depositar" id="inputDepositar" required >
+            <input type="number" placeholder="depositar" id="inputDepositar" required  >
             <br>
             <br>
-            <button onclick="envioDepo()" type="submit" id="enviar"> Enviar </button>
+            <button type="submit" id="enviar"> Enviar </button>
             <br>
-            <label for="retiroU"> Retirar :</label>
-            <input type="number" placeholder="retirar" id="inputRetirar" required>
+            <label for="retiroU"> Retiro :</label>
+            <input type="number" placeholder="retirar" id="inputRetirar" required> 
     
-            <button type="submit"  id="retirar">Retirar</button>
-           </div> 
+            <button type="submit"  onclick="retiro()" id="retirar">Retirar</button>
+        </div> 
     
          <div class="content" id="box2">
          <label for="cantidad"> Cantidad a Enviar </label> 
          <input type="number" name="" id="inputTransf" required placeholder=" a transferir">
          <br>
          <label for="nTarjeta">Número de tarjeta</label>
-         <input type="numer " name="" id="inputCredit" required  placeholder="número de tarjeta ">
+         <input type="number " id="inputTransf"  name="" id="inputCredit" required  placeholder="número de tarjeta ">
          <br>
          <br>
-         <button type="submit">Transferrir </button>
+         <button type="submit" id="Transf">Transferrir </button>
          </div>
 
           <div class="content" id="box3">
@@ -54,8 +55,8 @@
                 <p id="text4">Si desea Consultar su Historial de Transancciones </p>
                 <br>
                 <button type="submit" id="consultar"> Consultar</button>
-
-             </div>
+                <br>
+            </div>
   <script src="./app1.js"></script> 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
