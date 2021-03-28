@@ -3,7 +3,6 @@ console.log(today);
 
 
 
-let transf = document.getElementById('inputTransf');
 let payments = document.getElementById('inputPayments');
 let opciones = document.getElementById('opciones');
 let balance =document.getElementById ('balance ');
@@ -13,11 +12,7 @@ let balance =document.getElementById ('balance ');
 
 
 
- var account={
-    nombre : "Billy Guzmán",
-   pass :1234,
-    tarjeta : 789456,
- }
+  nombreUsuario= "Billy Guzmán";
 
 var transaccion ={
     balance :500,
@@ -27,6 +22,28 @@ var transaccion ={
 
 
  }
+  
+
+ 
+ window.onload =function(){
+   mostrarDatos();
+ }
+
+
+
+
+
+
+function mostrarDatos(){
+  document.getElementById("nombre").innerHTML = "Username : " + nombreUsuario;
+  
+
+}
+
+
+
+
+
 
 function depositar() {
   
@@ -53,6 +70,15 @@ function retiro () {
 
 
 
+function transef(){
+
+  let inputTransferencia = document.getElementById('inputTransf');
+
+
+
+
+  
+}
 
 
 
@@ -60,19 +86,16 @@ function retiro () {
 
 
 
-/*var enviar = document.getElementById('enviar');
-// enviar.addEventListener('click', deposit);
+// function enter(){
+//     var pass2=1234;
 
-function enter(){
-    var pass2=1234;
+//     if(pass2>=0){
+//         swal('bievenido');
+//       location.href="/project.html";
 
-    if(pass2>=0){
-        swal('bievenido');
-      location.href="/project.html";
-
-    }else{
-        swal("error");
-    }
+//     }else{
+//         swal("error");
+//     }
 
 
-  };*/
+//   }
