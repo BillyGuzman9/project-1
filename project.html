@@ -13,18 +13,19 @@
 <body>  
         <div id="titulo"> 
         <h1><center> <strong> <u>Welcome Pokémon Bank</u> </strong></center></h1> 
-        <span id="nombre"></span>
-        </div> 
+        <span id="nombre"></span> 
         <br>
-    
-
+        <span id=""> </span>
+        <br>
+        <br>
         <div class="content" id="box1"> 
             <label for="depositoU"> Deposito</label>
-            <input type="number" placeholder="depositar" id="inputDepositar" required  >
+            <input type="number" placeholder="depositar" id="inputDepositar" required >
             <br>
             <br>
             <button type="submit" id="enviar"> Enviar </button>
             <br>
+            <hr>
             <label for="retiroU"> Retiro :</label>
             <input type="number" placeholder="retirar" id="inputRetirar" required> 
     
@@ -32,30 +33,23 @@
         </div> 
     
          <div class="content" id="box2">
-         <label for="cantidad"> Cantidad a Enviar </label> 
-         <input type="number" name="" id="inputTransf" required placeholder=" a transferir">
-         <br>
-         <label for="nTarjeta">Número de tarjeta</label>
-         <input type="number " id="inputTransf"  name="" id="inputCredit" required  placeholder="número de tarjeta ">
-         <br>
-         <br>
-         <button type="submit" id="Transf">Transferrir </button>
+           <br>
+           <span id="trasf"> si desea transferir a otra cuenta por favor de "click" en transferir</span>
+           <hr>
+         <button onclick="transfe()" type="submit" id="Transf">Transferrir </button>
          </div>
 
           <div class="content" id="box3">
-          <select name="" id="opciones">
-          <option value="1"> Pago de Luz </option>
-          <option value="2">  pago de agua </option>
-          <option value="3"> Internet </option>
-          <option value="4"> Telefono</option>
-          </select>
-          <input type="number" placeholder="cantidad a pagar" id="inputPayments" required>
-          <button type="submit" id="pagar">Pagar</button>
+          <p id="pago"> si desea Pagar sus servicos haga click en "pagar" </p>
+          <br>
+          <hr>
+          <button  onclick="pagar()" type="submit" id="pagar">Pagar</button>
           </div>
 
             <div class="content" id="box4">
                 <p id="text4">Si desea Consultar su Historial de Transancciones </p>
                 <br>
+                <hr>
                 <button type="submit" id="consultar"> Consultar</button>
                 <br>
             </div>

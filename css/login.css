@@ -100,4 +100,5 @@ h2{
 .submit{
    border: transparent;
    color: black;
+   border-radius: 3px;
 }
