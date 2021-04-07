@@ -1,5 +1,5 @@
 body{
-    background-image: url(./img/fondojpg.jpg);
+    background-image:url(./img/fondojpg.jpg);
     background-size: cover;
     cursor: pointer;
 }

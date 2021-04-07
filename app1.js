@@ -2,19 +2,35 @@ let today = new Date()
 console.log(today);
 
 
+ 
 
 
-  var  pass = document.querySelector('inputPassword');
-  var form = document.querySelector("form-login#form");
+function enter(){
+  
+ let inputPassword = document.getElementById('inputPassword').value;
+  if( inputPassword==pass){
+     swal('login exitoso');
+    window.location("project.html");
+  }else{
+    alert('login error');
+  }
+}
 
-let nombreUsuario= "Billy Guzmán";
+
+
+
+let nombreUsuario= "Ash ketchum";
+let  Cuenta=  987654321;
+let pass =1234
+localStorage.setItem('usuario', nombreUsuario);
+ 
 
 // objetos de transcciones
-var transaccion ={
-    balance :500,
+    transaccion ={
+    balance :500,//Saldo inicial
     deposito : "",
     retiro : "",
-    payments :"",
+    pagos :"",
 
  }
   
@@ -25,9 +41,10 @@ var transaccion ={
  }
 
 
-//funcion usuario-nombre
+//funcion usuario-nombre, cuenta
 function mostrarDatos(){
   document.getElementById("nombre").innerHTML = "Username : " + nombreUsuario;
+  document.getElementById("cuenta").innerHTML= " Cuenta   :  "  + Cuenta;
   
 }
 
@@ -39,6 +56,7 @@ function depositar() {
   transaccion.balance +=valorADepositar;
   inputDeposito.value = '';
   swal('su balance nuevo es: '+transaccion.balance);
+  localStorage.setItem('deposito', transaccion.balance);
 }
 
 enviar.addEventListener('click', depositar)
@@ -48,8 +66,12 @@ function retiro () {
   let inputRetiro = document.getElementById('inputRetirar');
   let valorARetirar = parseInt(inputRetiro.value);
   transaccion.balance -=valorARetirar;
+
   inputRetiro.value = '';
   swal('su balance nuevo es: '+transaccion.balance);
+
+  localStorage.setItem('retiros' ,transaccion.balance);
+ 
 
 }
 
@@ -59,8 +81,7 @@ function transfe (){
   let cantidad = prompt('Ingrese porfavor la cantida a Transferir ');
 
   let balanceT = transaccion.balance-=cantidad;
-
-swal( 'su balance es  de  ' + balanceT , "la cantidad enviada fue de " + cantidad , +" al numero de tarjeta" + tarjeta );
+  swal('su balance es  de  ' + balanceT , "la cantidad enviada fue de " + cantidad , +" al numero de tarjeta" + tarjeta );
 }
 
 
@@ -78,6 +99,8 @@ function pagar(){
       let pagon1 = transaccion.balance-=pago1;
   
       swal('su pago de   servicio : '  + pagon1)
+
+      localStorage.setItem('pago-Numero', pago1 )
   
    break;
   
@@ -100,40 +123,23 @@ function pagar(){
         break;
        case "4":
   
-          let pago4 = prompt('ingrese la cantidad de a pagar de telefono')
+       let pago4 = prompt('ingrese la cantidad de a pagar de telefono')
       
-          let pagon4 = transaccion.balance-=pago4;
+      let pagon4 = transaccion.balance-=pago4;
       
-          swal('su pago fue  : '  + pagon4);
+      swal('su pago fue  : '  + pagon4);
 
-           break;
+       break;
       
   
   }
-  
-
-
-
-
-
 
 
 }
 
+// var ctx =document.getElementById("myChart").getContext('2d')
 
 
-
-
-// function enter(){
-//     var pass2=1234;
-
-//     if(pass2>=0){
-//         swal('bievenido');
-//       location.href="/project.html";
-
-//     }else{
-//         swal("error");
-//     }
-
-
-//   }
+// var myChart=new Chart (ctx,{
+//  type:
+// }
