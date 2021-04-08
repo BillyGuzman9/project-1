@@ -9,8 +9,9 @@ function enter(){
   
  let inputPassword = document.getElementById('inputPassword').value;
   if( inputPassword==pass){
-     swal('login exitoso');
-    window.location("project.html");
+     alert('login exitoso');
+     var url = window.location.origin + "/project.html";
+     window.location.href = url;
   }else{
     alert('login error');
   }
@@ -136,6 +137,17 @@ function pagar(){
 
 
 }
+
+function graficas(){
+
+  var url = window.location.origin + "/graficas.html";
+  window.location.href = url;
+
+}
+
+
+
+
 
 // var ctx =document.getElementById("myChart").getContext('2d')
 
