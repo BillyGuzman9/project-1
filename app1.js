@@ -15,8 +15,9 @@ function enter(){
   }else{
     alert('login error');
   }
+ sessionStorage.setItem('pin' , pass);
 }
-
+ 
 
 
 
@@ -24,7 +25,8 @@ let nombreUsuario= "Ash ketchum";
 let  Cuenta=  987654321;
 let pass =1234
 localStorage.setItem('usuario', nombreUsuario);
- 
+ localStorage.setItem('Número de cuenta ' , Cuenta);
+ localStorage.setItem("pin", pass);
 
 // objetos de transcciones
     transaccion ={
@@ -148,10 +150,3 @@ function graficas(){
 
 
 
-
-// var ctx =document.getElementById("myChart").getContext('2d')
-
-
-// var myChart=new Chart (ctx,{
-//  type:
-// }
