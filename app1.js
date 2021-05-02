@@ -1,152 +1,270 @@
-let today = new Date()
+var constraints = {
+  creditCardNumber: {
+    presence: true,
+    format: {
+      pattern: /^(34|37|4|5[1-5]).*$/,
+      message: function (
+        value,
+        attribute,
+        validatorOptions,
+        attributes,
+        globalOptions
+      ) {
+        return validate.format(`${value} no es una tarjeta valida`, {
+          num: value,
+        });
+      },
+    },
+    length: function (value, attributes, attributeName, options, constraints) {
+      if (value) {
+        if (/^(34|37).*$/.test(value)) return { is: 15 };
+
+        if (/^(4|5[1-5]).*$/.test(value)) return { is: 16 };
+      }
+      // Unknown card, don't validate length
+      return false;
+    },
+  },
+};  
+
+let today = new Date();
 console.log(today);
 
+let nombreUsuario = "Ash ketchum";
+let Cuenta = 987654321;
+let pass = 1234;
+localStorage.setItem("usuario", nombreUsuario);
 
- 
-
-
-function enter(){
-  
- let inputPassword = document.getElementById('inputPassword').value;
-  if( inputPassword==pass){
-     alert('login exitoso');
-     var url = window.location.origin + "/project.html";
-     window.location.href = url;
-  }else{
-    alert('login error');
-  }
- sessionStorage.setItem('pin' , pass);
-}
- 
-
-
-
-let nombreUsuario= "Ash ketchum";
-let  Cuenta=  987654321;
-let pass =1234
-localStorage.setItem('usuario', nombreUsuario);
- localStorage.setItem('Número de cuenta ' , Cuenta);
- localStorage.setItem("pin", pass);
+localStorage.setItem("Número de cuenta ", Cuenta);
+localStorage.setItem("pin", pass);
 
 // objetos de transcciones
-    transaccion ={
-    balance :500,//Saldo inicial
-    deposito : "",
-    retiro : "",
-    pagos :"",
+transaccion = {
+  balance: 500, //Saldo inicial
+};
 
- }
+if (
+  localStorage.getItem("HistorialNombre") === null &&
+  localStorage.getItem("HistorialValor") === null
+) {
+  let historial = ["inicial"];
+  let historialValor = [transaccion.balance];
   
- //función para mostrar mi usuario pantalla
- window.onload =function(){
-   mostrarDatos();
-  
- }
+  localStorage.setItem("HistorialNombre", JSON.stringify(historial));
+  localStorage.setItem("HistorialValor", JSON.stringify(historialValor));
+} else {
 
+  let balance = JSON.parse(localStorage.getItem("HistorialValor"));
+  transaccion.balance = balance[balance.length - 1];
+
+}
+function ActualizarHistorial(nombre, valor) {
+
+  let historial = JSON.parse(localStorage.getItem("HistorialNombre"));
+  let historialValor = JSON.parse(localStorage.getItem("HistorialValor"));
+  historial.push(nombre);
+  historialValor.push(valor);
+
+  localStorage.setItem("HistorialNombre", JSON.stringify(historial));
+  localStorage.setItem("HistorialValor", JSON.stringify(historialValor));
+}
+//función para mostrar mi usuario pantalla
+window.onload = function () {
+  mostrarDatos();
+};
 
 //funcion usuario-nombre, cuenta
-function mostrarDatos(){
+function mostrarDatos() {
   document.getElementById("nombre").innerHTML = "Username : " + nombreUsuario;
-  document.getElementById("cuenta").innerHTML= " Cuenta   :  "  + Cuenta;
-  
+  document.getElementById("cuenta").innerHTML = " Cuenta   :  " + Cuenta;
 }
-
 
 function depositar() {
-  
-  let inputDeposito = document.getElementById('inputDepositar');
+  let inputDeposito = document.getElementById("inputDepositar");
+
   let valorADepositar = parseInt(inputDeposito.value);
-  transaccion.balance +=valorADepositar;
-  inputDeposito.value = '';
-  swal('su balance nuevo es: '+transaccion.balance);
-  localStorage.setItem('deposito', transaccion.balance);
+  if (validate.isNumber(valorADepositar)) {
+    transaccion.balance += valorADepositar;
+    inputDeposito.value = "";
+
+    swal("su balance nuevo es: " + transaccion.balance, "", "success");
+    ActualizarHistorial("deposito", transaccion.balance);
+  } else {
+    swal("error", "el valor ingresado no es un numero", "error");
+  }
+}
+let enviar = document.getElementById("enviar");
+if (enviar) {
+  enviar.addEventListener("click", depositar);
 }
 
-enviar.addEventListener('click', depositar)
+function retiro() {
+  let inputRetiro = document.getElementById("inputRetirar");
 
-function retiro () {
-
-  let inputRetiro = document.getElementById('inputRetirar');
   let valorARetirar = parseInt(inputRetiro.value);
-  transaccion.balance -=valorARetirar;
+  if (validate.isNumber(valorARetirar)) {
+    transaccion.balance -= valorARetirar;
+    inputRetiro.value = "";
+    swal("su balance nuevo es: " + transaccion.balance, "", "success");
 
-  inputRetiro.value = '';
-  swal('su balance nuevo es: '+transaccion.balance);
-
-  localStorage.setItem('retiros' ,transaccion.balance);
- 
-
+    ActualizarHistorial("retiro", transaccion.balance);
+  } else {
+    swal("error", "el valor ingresado no es un numero", "error");
+  }
 }
 
-function transfe (){
+function transfe() {
+  swal({
+    title: "ingrese el numero de tarjeta",
+    content: {
+      element: "input",
+    },
+  }).then(function (value) {
+    let tarjeta = value;
+    let validation = validate({ creditCardNumber: tarjeta }, constraints);
+    if (validation === undefined) {
+      swal({
+        title: "ingrese la cantidad a enviar",
+        content: {
+          element: "input",
+        },
+      }).then(function (value) {
+        let cantidad = value;
+        if (cantidad > transaccion.balance) {
+          swal(
+            `saldo insuficiente: su saldo actual es de ${transaccion.balance} pero decea enviar ${cantidad}`
+          );
+        } else {
+          transaccion.balance -= cantidad;
+          swal(
+            `su balance es  de ${transaccion.balance}`,
+            `la cantidad enviada fue de ${cantidad} al numero de tarjeta ${tarjeta}`
+          );
 
-  let tarjeta= prompt('ingrese el numero de tarjeta');
-  let cantidad = prompt('Ingrese porfavor la cantida a Transferir ');
-
-  let balanceT = transaccion.balance-=cantidad;
-  swal('su balance es  de  ' + balanceT , "la cantidad enviada fue de " + cantidad , +" al numero de tarjeta" + tarjeta );
+          ActualizarHistorial("transferencia", transaccion.balance);
+        }
+      });
+    } else {
+      swal("error", validation.creditCardNumber[0], "error");
+    }
+  });
 }
 
-
-function pagar(){
-
-  let pagos = prompt(' Ingrese el Número correspondiente al servicio que desee pagar '+ 
-  "\n" + 1 + " - Agua" + "\n" + 2 + " - Luz" + "\n" + 3 + 
-  " - Internet" + "\n" + 4 + "- Teléfono");
-  
-  switch(pagos ){
-      case"1":
-  
-      let pago1 = prompt('ingrese la cantidad de a pagar de agua ')
-  
-      let pagon1 = transaccion.balance-=pago1;
-  
-      swal('su pago de   servicio : '  + pagon1)
-
-      localStorage.setItem('pago-Numero', pago1 )
-  
-   break;
-  
-   case "2":
-      let pago2 = prompt('ingrese la cantidad de a pagar de luz ')
-  
-      let pagon2 = transaccion.balance-=pago2;
-  
-      swal('su pago de  servicio  : '   + pagon2);
-     break;
-  
-    case "3":
-  
-      let pago3 = prompt('ingrese la cantidad de a pagar de intenet')
-  
-      let pagon3 = transaccion.balance-=pago3;
-  
-      swal('su pago fue  : '  + pagon3);
+function pagar() {
+  swal(
+    `
+    1 - Agua \n
+    2 - Luz \n
+    3 - Internet \n
+    4 - Telefono \n
+    `,
+    {
+      title: "Ingrese el Número correspondiente al servicio que desee pagar ",
+      content: {
+        element: "input",
+      },
+    }
+  ).then(function (pagos) {
+    switch (pagos) {
+      case "1":
+        swal("ingrese la cantidad de a pagar de agua ", {
+          content: {
+            element: "input",
+          },
+        }).then(function (value) {
+          if (validate.isNumber(parseInt(value))) {
+            let pago1 = value;
+            transaccion.balance -= pago1;
+            swal(
+              "su pago de   servicio de agua, nuevo saldo : " +
+              transaccion.balance,
+              "",
+              "success"
+            );
+            
+            ActualizarHistorial("pago agua", transaccion.balance);
+          } else {
+            swal("error", "la catidad no es un valor numerico", "error");
+          }
+        });
 
         break;
-       case "4":
-  
-       let pago4 = prompt('ingrese la cantidad de a pagar de telefono')
-      
-      let pagon4 = transaccion.balance-=pago4;
-      
-      swal('su pago fue  : '  + pagon4);
 
-       break;
-      
-  
-  }
+      case "2":
+        swal("ingrese la cantidad de a pagar de Luz ", {
+          content: {
+            element: "input",
+          },
+        }).then(function (value) {
+          if (validate.isNumber(parseInt(value))) {
+            let pago2 = value;
+            transaccion.balance -= pago2;
+            swal(
+              "su pago de servicio de luz, nuevo saldo: " + transaccion.balance,
+              "",
+              "success"
+            );
 
+            ActualizarHistorial("pago Luz", transaccion.balance);
+          } else {
+            swal("error", "la catidad no es un valor numerico", "error");
+          }
+        });
 
+        break;
+
+      case "3":
+        swal("ingrese la cantidad de a pagar de Internet ", {
+          content: {
+            element: "input",
+          },
+        }).then(function (value) {
+          if (validate.isNumber(parseInt(value))) {
+            let pago3 = value;
+            transaccion.balance -= pago3;
+            swal(
+              "su pago de servicio de Internet, nuevo saldo: " +
+              transaccion.balance,
+              "",
+              "success"
+            );
+
+            ActualizarHistorial("pago Internet", transaccion.balance);
+          } else {
+            swal("error", "la catidad no es un valor numerico", "error");
+          }
+        });
+        break;
+      case "4":
+        swal("ingrese la cantidad de a pagar de Teléfono ", {
+          content: {
+            element: "input",
+          },
+        }).then(function (value) {
+          if (validate.isNumber(parseInt(value))) {
+            let pago4 = value;
+            transaccion.balance -= pago4;
+            swal(
+              "su pago de servicio de Teléfono, nuevo saldo: " +
+              transaccion.balance,
+              "",
+              "success"
+            );
+
+            ActualizarHistorial("pago Teléfono", transaccion.balance);
+          } else {
+            swal("error", "la catidad no es un valor numerico", "error");
+          }
+        });
+        break;
+        default:
+          swal("error", "opcion no valida", "error");
+        break;
+    }
+  });
 }
 
-function graficas(){
-
+function graficas() {
   var url = window.location.origin + "/graficas.html";
   window.location.href = url;
-
 }
-
-
-
-
