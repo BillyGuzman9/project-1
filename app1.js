@@ -265,6 +265,6 @@ function pagar() {
 }
 
 function graficas() {
-  var url = window.location.origin + "/graficas.html";
-  window.location.href = url;
+  location.href = "graficas.html";
+ 
 }
